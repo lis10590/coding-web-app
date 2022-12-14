@@ -1,3 +1,4 @@
 const CodeBlock = require("./CodeBlockSchema");
+const User = require("./UserSchema");
 
-module.exports = { CodeBlock };
+module.exports = { CodeBlock, User };
