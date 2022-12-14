@@ -10,7 +10,6 @@ const CodeBlock = () => {
   let { codeBlockId } = useParams();
   const codeBlocks = useSelector(selectAllCodeBlocks);
   const socket = useSelector((state) => state.socket.socket);
-  console.log(socket);
 
   let [codeBlock] = codeBlocks.filter(
     (codeBlock) => codeBlockId === codeBlock._id
@@ -18,10 +17,11 @@ const CodeBlock = () => {
   const [code, setCode] = useState("");
   useEffect(() => {
     dispatch(getAllCodeBlocks());
-    socket.on("receive_message", (data) => {
-      setCode(data.message);
-    });
-  }, [dispatch, socket]);
+    // socket.on("receive_message", (data) => {
+    //   console.log(data);
+    //   setCode(data.message);
+    // });
+  }, [dispatch]);
 
   return (
     <Columns className="mt-6">

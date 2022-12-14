@@ -23,13 +23,24 @@ const Lobby = () => {
   }, [dispatch]);
 
   const codeBlocks = useSelector(selectAllCodeBlocks);
+  const connectedUsers = useSelector((state) => state.socket.numOfUsers);
 
   const onClickButton = (id, title) => {
     codeBlockId = id;
     setRoom(title);
-    navigate(`/codeBlocks/${id}`);
-    socket.emit("join_room", room);
+    dispatch(socketActions.editRoom(title));
+    const data = {
+      room: title,
+      username: connectedUsers !== 0 ? "student" : "mentor",
+      socketId: socket.id,
+    };
+    console.log(data.username);
+    socket.emit("join_room", data);
     dispatch(socketActions.editSocket(socket));
+    dispatch(socketActions.editNumOfUsers());
+    dispatch(socketActions.editSocketId(socket.id));
+
+    navigate(`/codeBlocks/${id}`);
   };
 
   return (
