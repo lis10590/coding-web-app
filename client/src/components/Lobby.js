@@ -33,7 +33,7 @@ const Lobby = () => {
     dispatch(socketActions.editRoom(title));
     const data = {
       room: title,
-      username: connectedUsers !== 0 ? "student" : "mentor",
+      username: users.length > 1 ? "student" : "mentor",
       socketId: socket.id,
     };
     console.log(data.username);
