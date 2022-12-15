@@ -64,7 +64,7 @@ const Editor = (props) => {
         theme={vscodeDark}
         onChange={onChangeCode}
         value={code}
-        readOnly={checkSocketId() ? false : true}
+        // readOnly={checkSocketId() ? false : true} doesn't work after deployment
       />
 
       <Button className="mt-4" color="danger" onClick={onSubmitAnswer}>
