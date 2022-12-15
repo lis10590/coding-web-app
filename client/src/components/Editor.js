@@ -64,8 +64,9 @@ const Editor = (props) => {
         theme={vscodeDark}
         onChange={onChangeCode}
         value={code}
-        editable={checkSocketId() ? true : false}
+        readOnly={checkSocketId() ? false : true}
       />
+
       <Button className="mt-4" color="danger" onClick={onSubmitAnswer}>
         Submit Answer
       </Button>
