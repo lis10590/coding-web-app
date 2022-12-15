@@ -29,4 +29,15 @@ router.post("/addUser", async (req, res) => {
   });
 });
 
+router.delete("/deleteUser", (req, res) => {
+  User.findOneAndRemove({ socketId: req.body.userSocketId }, (err, doc) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("Removed User : ", doc);
+      res.status(200).json({ id: doc._id });
+    }
+  });
+});
+
 module.exports = router;

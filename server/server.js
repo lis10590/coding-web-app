@@ -4,12 +4,14 @@ const app = express();
 const router = express.Router();
 const routes = require("./routes");
 require("./database");
+require("dotenv").config();
+const path = require("path");
 const http = require("http");
 const { Server } = require("socket.io");
 
-const port = 3001;
+const port = process.env.PORT;
 
-const origin = "http://localhost:3000";
+const origin = process.env.ORIGIN;
 
 app.use(
   cors({
@@ -45,15 +47,22 @@ io.on("connection", (socket) => {
   });
 
   socket.on("send_message", (data) => {
-    socket.to(data.room).emit("receive_message", data);
-
-    // console.log(`entered room ${data.room}`);
+    socket.to(data.room).emit(`receive_message_room_${data.room}`, data);
   });
 
   socket.on("disconnect", () => {
-    console.log("user disconnected");
+    console.log(`user ${socket.id} disconnected`);
   });
 });
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../client/build")));
+  app.get("*", (req, res) => {
+    res.sendFile(
+      path.resolve(__dirname, "../", "client", "build", "index.html")
+    );
+  });
+}
 
 server.listen(port, () => {
   console.log(`Server is listening on port ${port}`);

@@ -4,7 +4,6 @@ const initialSocketState = {
   socket: {},
   room: "",
   numOfUsers: 0,
-  socketIds: [],
 };
 const socketSlice = createSlice({
   name: "socket",
@@ -18,10 +17,6 @@ const socketSlice = createSlice({
     },
     editNumOfUsers(state) {
       state.numOfUsers = state.numOfUsers + 1;
-    },
-
-    editSocketId(state, action) {
-      state.socketIds = [...state.socketIds, action.payload];
     },
   },
 });
