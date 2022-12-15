@@ -6,7 +6,7 @@ import { getAllCodeBlocks, selectAllCodeBlocks } from "../store/codeBlocks";
 import { socketActions } from "../store/socket";
 import { getAllUsers, selectAllUsers, userAddition } from "../store/users";
 import io from "socket.io-client";
-const socket = io.connect("http://localhost:3001", {
+const socket = io.connect(process.env.REACT_APP_API_URL, {
   transports: ["websocket"],
   rejectUnauthorized: false,
 });
