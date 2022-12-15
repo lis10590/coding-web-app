@@ -84,7 +84,7 @@ const usersSlice = createSlice({
       .addCase(userAddition.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.users = action.payload;
+        state.users = state.users.push(action.payload);
       })
       .addCase(userAddition.rejected, (state, action) => {
         state.isLoading = false;
